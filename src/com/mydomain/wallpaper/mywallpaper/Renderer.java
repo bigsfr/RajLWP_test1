@@ -5,6 +5,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import rajawali.materials.Material;
+import rajawali.materials.textures.ATexture.TextureException;
 import rajawali.materials.textures.Texture;
 import rajawali.primitives.Plane;
 import rajawali.renderer.RajawaliRenderer;
@@ -43,7 +44,7 @@ public class Renderer extends RajawaliRenderer {
 			p.setMaterial(material);
 			getCurrentScene().addChild(p);
 
-		} catch (Exception e) {
+		} catch (TextureException e) {
 			e.printStackTrace();
 		}
 	}
@@ -60,24 +61,47 @@ public class Renderer extends RajawaliRenderer {
 	@Override
 	public void onTouchEvent(MotionEvent event) {
 		Log.e("MY", "touched");
-
+		// ArrayList<ATexture> l = material.getTextureList();
+		//
+		// if (l.size()>0) {
+		// ATexture t = l.get(0);
+		// material.removeTexture(t);
+		// getTextureManager().removeTexture(t);
+		//
+		//
+		// }
+		// else {
+		//
+		// try {
+		//
+		// material.addTexture(new Texture("rajawaliTex", R.drawable.rajawali_tex));
+		// p.setMaterial(material);
+		// material.enableLighting(false);
+		//
+		// //getTextureManager().replaceTexture(new Texture("rajawaliTex", R.drawable.rajawali_tex));
+		// } catch (TextureException e) {
+		// e.printStackTrace();
+		// }
+		// }
 
 		if (current_texture==0)
 		{
-			
 			myTexture.setResourceId(R.drawable.rajawali_tex2);
+			// or
+			//myTexture.setBitmap(myNewBitmap);
 			getTextureManager().replaceTexture(myTexture);	
 			current_texture=1;
-			
 		}else if (current_texture==1){
-			
 			myTexture.setResourceId(R.drawable.rajawali_tex);
+			// or
+			//myTexture.setBitmap(myNewBitmap);
 			getTextureManager().replaceTexture(myTexture);	
 			current_texture=0;
-			
 		}
 
 		Log.e("MY", "TextureManager texture count is now "+ getTextureManager().getNumTextures());
 		Log.e("MY", " material texture count is now "+ material.getTextureList().size());
 	}
 }
+
+
